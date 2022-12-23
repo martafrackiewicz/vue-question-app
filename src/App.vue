@@ -6,9 +6,13 @@
       <component
         :is="screens[position]"
         :question="question"
+        :result="result"
         @goto="handleGoTo"
         @question="handleQuestion"
-    /></transition>
+        @showResult="showResult"
+        @startOver="startOver"
+      />
+    </transition>
   </div>
 </template>
 
@@ -28,6 +32,8 @@ export default {
       screens: ['appInitial', 'appConfirm', 'appResult'],
       position: 0,
       question: '',
+      result: '',
+      list: ['Yes', 'No', 'Maybe', 'Not sure...', 'Ask a friend'],
     };
   },
   methods: {
@@ -36,6 +42,27 @@ export default {
     },
     handleQuestion(question) {
       this.question = question;
+    },
+    getRandomValue() {
+      return this.list[Math.floor(Math.random() * this.list.length)];
+    },
+    generateResult() {
+      let rand = this.getRandomValue();
+
+      if (this.result !== '') {
+        while (rand === this.result) {
+          rand = this.getRandomValue();
+        }
+      }
+      this.result = rand;
+    },
+    showResult() {
+      this.generateResult();
+    },
+    startOver() {
+      this.position = 0;
+      this.question = '';
+      this.result = '';
     },
   },
 };
