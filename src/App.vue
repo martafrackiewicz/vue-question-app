@@ -4,6 +4,7 @@
   <div class="container">
     <component
       :is="screens[position]"
+      :question="question"
       @goto="handleGoTo"
       @question="handleQuestion"
     />

@@ -28,7 +28,7 @@ export default {
     handleNext(e) {
       e.preventDefault();
 
-      if (this.question.length <= 5) {
+      if (this.question.length <= 2) {
         this.error = true;
       } else {
         this.error = false;
