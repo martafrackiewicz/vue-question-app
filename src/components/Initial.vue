@@ -17,7 +17,7 @@
       >
         Next
       </button>
-      <div v-if="error" class="error">Your question is too short</div>
+      <!-- <div v-if="error" class="error">Your question is too short</div> -->
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       question: '',
-      error: false,
+      // error: false,
     };
   },
   methods: {
@@ -35,9 +35,20 @@ export default {
       e.preventDefault();
 
       if (this.question.length <= 2) {
-        this.error = true;
+        // this.error = true;
+
+        // this.$toast.error('Warning');
+        this.$emit('toast', {
+          type: 'error',
+          message: 'Your question is too short',
+        });
+      } else if (this.question.length >= 10) {
+        this.$emit('toast', {
+          type: 'error',
+          message: 'Your question is too long',
+        });
       } else {
-        this.error = false;
+        // this.error = false;
         this.$emit('goto', 1);
         this.$emit('question', this.question);
       }

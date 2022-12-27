@@ -11,6 +11,7 @@
         @question="handleQuestion"
         @showResult="showResult"
         @startOver="startOver"
+        @toast="handleToast"
       />
     </transition>
   </div>
@@ -37,6 +38,14 @@ export default {
     };
   },
   methods: {
+    handleToast(values) {
+      this.$toast.show(values.message, {
+        type: values.type,
+        position: 'top',
+        duration: 2000,
+        pauseOnHover: false,
+      });
+    },
     handleGoTo(position) {
       this.position = position;
     },
